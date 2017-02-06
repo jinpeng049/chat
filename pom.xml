@@ -25,7 +25,7 @@
                 <version>9.4.0.M0</version>
                 <configuration>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>8084</port>
                     </httpConnector>
                     <reload>manual</reload>
                     <!-- <scanIntervalSeconds>3</scanIntervalSeconds> -->
@@ -36,7 +36,7 @@
                         </systemProperty>
                     </systemProperties>
                     <webApp>
-                        <contextPath>/chat</contextPath>
+                        <contextPath>/aa</contextPath>
                     </webApp>
                     <!-- <webDefaultXml>webdefault.xml</webDefaultXml> -->
                 </configuration>
