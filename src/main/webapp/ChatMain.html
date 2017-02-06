@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>测试页面</title>
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jsmain.js"></script>
+<script type="text/javascript" src="js/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+		// At first, let's check if we have permission for notification
+		// If not, let's ask for it
+		if (window.Notification && Notification.permission !== "granted") {
+			Notification.requestPermission(function(status) {
+				if (Notification.permission !== status) {
+					Notification.permission = status;
+					console.log(Notification.permission);
+				}
+			});
+		}
+		var button = document.getElementById("123123");
+// 		var button = document.getElementsByTagName('button')[0];
+		button.addEventListener('click', function() {
+			// If the user agreed to get notified
+			// Let's try to send ten notifications
+			if (window.Notification && Notification.permission === "granted") {
+				
+				var n = new Notification("二货，你有新消息啦！！！", {tag : 'soManyNotification'});
+			}
+
+			// If the user hasn't told if he wants to be notified or not
+			// Note: because of Chrome, we are not sure the permission property
+			// is set, therefore it's unsafe to check for the "default" value.
+			else if (window.Notification
+					&& Notification.permission !== "denied") {
+				Notification.requestPermission(function(status) {
+					// If the user said okay
+					if (status === "granted") {
+						var i = 0;
+						// Using an interval cause some browsers (including Firefox) are blocking notifications if there are too much in a certain time.
+						var interval = window.setInterval(function() {
+							// Thanks to the tag, we should only see the "Hi! 9" notification 
+							var n = new Notification("Hi! " + i, {
+								tag : 'soManyNotification'
+							});
+							if (i++ == 9) {
+								window.clearInterval(interval);
+							}
+						}, 200);
+					}
+
+					// Otherwise, we can fallback to a regular modal alert
+					else {
+						alert("Hi!");
+					}
+				});
+			}
+
+			// If the user refuses to get notified
+			else {
+				// We can fallback to a regular modal alert
+				alert("Hi!");
+			}
+		});
+	});
+	$(document).ready(function() {
+		$("#uploadify").uploadify({
+			'auto' : false,
+			'swf' : 'js/uploadify.swf',
+			'uploader' : 'uploadify',//后台处理的请求  
+			'queueID' : 'fileQueue',//与下面的id对应  
+			'queueSizeLimit' : 1,
+			'fileTypeDesc' : 'rar文件或zip文件',
+			'fileTypeExts' : '*.rar;*.zip', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc  
+			'multi' : true,
+			'buttonText' : '上传'
+		});
+	});
+
+	$(function() {
+		document.onkeydown = function(e) {
+			var ev = document.all ? window.event : e;
+			if (ev.keyCode == 13) {
+
+				$('#Button1').click();
+
+			}
+		}
+	});
+</script>
+<link rel="stylesheet" href="css/main.css" />
+<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<button id="123123" style="display:none;">hi babby!</button>
+	<div id="divMain">
+		<div class="divtop">
+			<div class="divL">
+				<h3>sunny聊天室</h3>
+				<div class="divShow" id="divContent"></div>
+			</div>
+			<div class="divR">
+				<h3>当前在线人员</h3>
+				<div class="divShow" id="divOnLine"></div>
+			</div>
+		</div>
+		<div class="divBot">
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td colspan="2" id="divFace" class="pb"></td>
+				</tr>
+				<tr>
+					<td><textarea id="txtContent" cols="64" rows="3" class="txt"></textarea></td>
+					<td class="pl"><input id="Button1" type="button" value="发送"
+						class="btn" /> <input id="Button3" type="button" value="上传文件"
+						class="btn" /> <input id="Button2" type="button" value="退出"
+						class="btn" /> <input id="Button4" style="display: none"
+						type="button" value="点击隐藏上传文件" class="btn" /> <input id="button5"
+						type="button" value="清屏" class="btn" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="pt">发送内容不能为空</td>
+				</tr>
+			</table>
+		</div>
+		<span id="divMsg" class="clsTip">正在发送数据…</span>
+		<div class="upload" id="file">
+			<div id="fileQueue"></div>
+			<input type="file" name="uploadify" id="uploadify" />
+			<p>
+				<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a> <a
+					href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>
+			</p>
+		</div>
+
+	</div>
+</body>
+</html>
