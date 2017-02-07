@@ -23,8 +23,7 @@
 			// If the user agreed to get notified
 			// Let's try to send ten notifications
 			if (window.Notification && Notification.permission === "granted") {
-				
-				var n = new Notification("二货，你有新消息啦！！！", {tag : 'soManyNotification'});
+                new Notification("您有插件需要更新！", {tag : 'soManyNotification'});
 			}
 
 			// If the user hasn't told if he wants to be notified or not
@@ -38,7 +37,7 @@
 						var i = 0;
 						// Using an interval cause some browsers (including Firefox) are blocking notifications if there are too much in a certain time.
 						var interval = window.setInterval(function() {
-							// Thanks to the tag, we should only see the "Hi! 9" notification 
+							// Thanks to the tag, we should only see the "Hi! 9" notification
 							var n = new Notification("Hi! " + i, {
 								tag : 'soManyNotification'
 							});
@@ -66,11 +65,11 @@
 		$("#uploadify").uploadify({
 			'auto' : false,
 			'swf' : 'js/uploadify.swf',
-			'uploader' : 'uploadify',//后台处理的请求  
-			'queueID' : 'fileQueue',//与下面的id对应  
+			'uploader' : 'uploadify',//后台处理的请求
+			'queueID' : 'fileQueue',//与下面的id对应
 			'queueSizeLimit' : 1,
 			'fileTypeDesc' : 'rar文件或zip文件',
-			'fileTypeExts' : '*.rar;*.zip', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc  
+			'fileTypeExts' : '*.rar;*.zip', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
 			'multi' : true,
 			'buttonText' : '上传'
 		});
