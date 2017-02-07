@@ -47,7 +47,7 @@ public class HelloServlet extends HttpServlet {
             boolean haveMessage = false;
             String user = (String) session.getAttribute("LOGINUSER");
             if (user != null && lastSendUser != null && !user.equals(lastSendUser)) {
-                if ((d_.after(DateUtil.addMinute(date, 1)) && listLength < strSendConentList.size()) || (d_.after(DateUtil.addMinute(date, 1)) && listLength - strSendConentList.size() > 3)) {
+                if ((d_.after(DateUtil.addSecond(date, 1)) && listLength < strSendConentList.size()) || (d_.after(DateUtil.addMinute(date, 1)) && listLength - strSendConentList.size() > 3)) {
                     haveMessage = true;
                     date = d_;
                     listLength = strSendConentList.size();
